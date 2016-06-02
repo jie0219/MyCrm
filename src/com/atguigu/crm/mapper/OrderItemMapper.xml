@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.crm.mapper.OrderItemMapper">
+
+	<select id="getAllItem" resultType="com.atguigu.crm.entity.OrderItem">
+	
+	 select o.id,o.item_count as"count",o.money as"money" ,unit as "product.unit",name as"product.name" from order_items o 
+   	right outer join products p
+   	on  p.id =o.product_id
+  	where order_id =#{id}
+	</select>
+	
+
+</mapper>

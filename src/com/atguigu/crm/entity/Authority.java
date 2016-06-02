@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Authority extends IdEntity{
-
+	//ss
 	//权限的名字, 用于显示
 	private String displayName;
 	//权限的名字: 用于配置 Shiro

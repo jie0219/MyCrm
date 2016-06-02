@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.crm.mapper.OrderMapper">
+
+	<select id="getById" resultType="com.atguigu.crm.entity.Order">
+		select id , no,order_date as "date" ,status,address ,customer_id as "customer.id"
+		from orders where id = #{id}
+	</select>
+	
+	
+	<select id="getTotalElements" resultType="long">
+	
+	select count(*) from orders where customer_id = #{id}
+	</select>
+
+	<select id="getOrderList" resultType="com.atguigu.crm.entity.Order">
+		select *
+		from (select  rownum rn ,id , no,order_date as "date" ,status,address ,customer_id as "customer.id"
+		from orders where customer_id = #{id})
+		<![CDATA[
+			WHERE rn >= #{firstIndex} AND rn < #{endIndex}
+		]]>
+	</select>
+	
+
+</mapper>

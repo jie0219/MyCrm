@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.crm.mapper.StorageMapper">
+	<!-- //所属商品
+	* id
+	private Product product;
+	//仓库
+	* private String wareHouse;
+	
+	//库位
+  *	private String stockWare;
+	//数量
+  *	private int stockCount;
+	
+	//备注
+  *	private String memo; -->
+	
+	<!-- // 产品名称
+  *	private String name;
+	// 产品型号
+	private String type;
+
+	// 产品批次
+	private String batch;
+	// 产品单位
+	private String unit;
+
+	// 单价
+	private int price;
+	// 备注
+	private String memo; -->
+	
+	<!-- product.name wareHouse   -->
+	<sql id="queryCondition">
+		WHERE 1=1 
+		<if test="productName != null and productName != '' ">
+			and p.name like #{productName}
+		</if>
+		<if test="wareHouse != null and wareHouse != '' ">
+			and ware_House like #{wareHouse} 
+		</if>
+	</sql>
+	
+	
+	<select id="getTotalElements"  resultType="long">
+		select count(*) from storages s   
+		left outer join products p 
+		on s.product_id = p.id 
+		<include refid="queryCondition"/>
+	</select>
+	<select id="getList" resultType="com.atguigu.crm.entity.Storage">
+		select * from (
+			select rownum rn ,s.id , stock_ware as "stockWare" ,stock_Count as "stockCount" ,ware_House  as "wareHouse", s.memo , p.name as "product.name"
+			from storages s left outer join products p  on
+			s.product_id = p.id 
+			<include refid="queryCondition"/>
+		)
+		<![CDATA[
+		where rn>=#{startIndex} and rn<#{endIndex}	
+		]]>
+	</select>
+	<select id="getStorage" resultType="com.atguigu.crm.entity.Storage">
+		select s.id , stock_ware as "stockWare" ,stock_Count as "stockCount" ,ware_House  as "wareHouse", s.memo , p.name as "product.name",product_id as "product.id"
+			from storages s left outer join products p  on
+			s.product_id = p.id where s.id = #{id}
+	</select>
+	<insert id="save">
+		insert into storages(id,stock_ware,stock_Count,ware_House,memo,product_id)
+		values(crm_seq.nextval,#{stockWare},#{stockCount},#{wareHouse},#{memo},#{product.id})
+	</insert>
+	<update id="update">
+		update storages set stock_Count=#{stockCount} where id = #{id}
+	</update>
+	<select id="delete">
+		delete from storages where id =#{id}
+	</select>
+
+</mapper>

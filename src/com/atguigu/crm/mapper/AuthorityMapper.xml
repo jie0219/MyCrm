@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.crm.mapper.AuthorityMapper">
+
+	<delete id="delete">
+		delete from role_authority where role_id = #{id}
+	</delete>
+	
+	<insert id="insert">
+		insert into role_authority(role_id,authority_id) values (#{id},#{authId})
+	</insert>
+	
+	<select id="getParentAuth" resultMap="authMap" >
+		select id, display_name  
+		from authorities where url='/'
+	</select>
+	<resultMap type="com.atguigu.crm.entity.Authority" id="authMap">
+		<id column="id" property="id"/>
+		<result column="display_name" property="displayName"/>
+		<collection property="subAuthorities" column="id" 
+				 ofType="com.atguigu.crm.entity.Authority" select="sonSelect">
+		</collection>
+	</resultMap>
+
+	<select id="sonSelect" resultType="com.atguigu.crm.entity.Authority">
+		select id ,display_name as "displayName" from authorities  where parent_authority_id = #{id}
+	</select>
+
+</mapper>

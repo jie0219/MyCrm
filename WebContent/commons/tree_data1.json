@@ -1,0 +1,128 @@
+[{
+	"id":1,
+	"text":"客户关系管理系统",
+	"children":[{
+		"id":11,
+		"text":"营销管理",
+		"state": "open",
+		"children":[{
+			"id":111,
+			"text":"营销机会管理",
+			"attributes":{    
+            "url":"chance/list"   
+        }
+		},{
+			"id":112,
+			"text":"营销开发计划",
+			"attributes":{    
+            "url":"plan/list2"
+            }
+		}]
+	},{
+		"id":12,
+		"text":"客户管理",
+		"state": "open",
+		"children":[{
+			"id":121,
+			"text":"客户信息管理",
+			"attributes":{    
+            "url":"customer/list2" }
+		},{
+			"id":122,
+			"text":"客户流失管理",
+			"attributes":{    
+            "url":"drain/list2" }
+		}]
+	},{
+		"id":13,
+		"text":"服务管理",
+		"state":"open",
+		"children":[{
+			"id":131,
+			"text":"服务创建",
+			"attributes":{    
+            "url":"chance/list" }
+		},{
+			"id":132,
+			"text":"服务分配",
+			"attributes":{    
+            "url":"chance/list" }
+		},{
+			"id":133,
+			"text":"服务处理",
+			"attributes":{    
+            "url":"chance/list" }
+		},{
+			"id":134,
+			"text":"服务反馈",
+			"attributes":{    
+            "url":"chance/list" }
+		},{
+			"id":135,
+			"text":"服务归档",
+			"attributes":{    
+            "url":"chance/list" }
+		}]
+	},{
+		"id":14,
+		"text":"统计报表",
+		"state":"open",
+		"children":[{
+			"id":141,
+			"text":"客户贡献分析",
+			"attributes":{    
+            "url":"contribution/list2" }
+		},{
+			"id":142,
+			"text":"客户构成分析",
+			"attributes":{    
+            "url":"customer/consist/list2" }
+		},{
+			"id":143,
+			"text":"客户服务分析",
+			"attributes":{    
+            "url":"chance/list" }
+		},{
+			"id":144,
+			"text":"客户流失分析",
+			"attributes":{    
+            "url":"drain/analyse/list2" }
+		}]
+	},{
+		"id":15,
+		"text":"基础数据",
+		"state":"open",
+		"children":[{
+			"id":151,
+			"text":"数据字典管理",
+			"attributes":{    
+            "url":"dict/list2" }
+		},{
+			"id":152,
+			"text":"查询产品信息",
+			"attributes":{    
+            "url":"product/list2" }
+		},{
+			"id":153,
+			"text":"查询库存信息",
+			"attributes":{    
+            "url":"storage/list2" }
+		}]
+	},{
+		"id":16,
+		"text":"系统权限管理",
+		"state":"open",
+		"children":[{
+			"id":161,
+			"text":"系统用户管理",
+			"attributes":{    
+            "url":"user/list2" }
+		},{
+			"id":162,
+			"text":"角色管理",
+			"attributes":{    
+            "url":"role/list2" }
+		
+		}]
+	}]
+}]

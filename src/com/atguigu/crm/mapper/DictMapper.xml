@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 哈哈啊哈 -->
+<mapper namespace="com.atguigu.crm.mapper.DictMapper">
+	
+	<select id="getTotalElements2" resultType="long">
+		select count(id) from dicts 
+		<include refid="queryCondition"/>
+		
+	</select>
+	<sql id="queryCondition">
+		where 1=1
+		<if test="item!=null and item!=''">
+			and item like #{item}
+		</if>
+		<if test="type!=null and type!=''">
+			and type like #{type}
+		</if>
+		
+		<if test="value !=null and value!=''">
+			and type like #{value}
+		</if>
+		
+	</sql>
+	<select id="getContent2" resultType="com.atguigu.crm.entity.Dict">
+		select * from(
+		select rownum nu,id ,editable,item,type,value from dicts 
+			<include refid="queryCondition"/>
+		)
+		where 
+		<![CDATA[
+			nu>=#{firstIndex} and nu<=#{endIndex}
+		]]>
+		
+	</select>
+	<update id="update">
+	update  dicts set editable=#{editable},item=#{item},type=#{type},value=#{value} where
+	id =#{id}
+		
+	</update>
+	
+	<select id="getById" resultType="com.atguigu.crm.entity.Dict">
+		select * from dicts where id=#{id}
+	
+	</select>
+
+	<delete id="delete">
+		delete from dicts where id=#{id}
+	
+	</delete>
+	
+	<insert id="save">
+		insert into dicts(id,editable,item,type,value) values(sql_id.nextval,#{editable},#{item},#{type},#{value}) 
+	
+	</insert>
+	
+	<select id="getTotalElements" resultType="long">
+		select count(id) from dicts
+	
+	</select>
+	
+	<select id="getContent" resultType="com.atguigu.crm.entity.Dict">
+		select * from (
+			SELECT rownum nu ,editable,id,type,item,value from dicts
+		)
+		where 
+		<![CDATA[
+			nu>=#{firstIndex} and nu<=#{endIndex}
+		]]>
+	
+	</select>
+</mapper>
